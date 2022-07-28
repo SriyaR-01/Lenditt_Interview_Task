@@ -1,0 +1,87 @@
+<div class="mat-elevation-z8 data-table">
+  <form [formGroup]="form" (submit)="applyDateFilter()">
+    <input
+      matInput
+      placeholder="Date From"
+      [matDatepicker]="picker1"
+      formControlName="fromDate"
+      required
+      (click)="picker1.open()"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+
+    <input
+      matInput
+      placeholder="toDate"
+      [matDatepicker]="picker2"
+      formControlName="toDate"
+      required
+      (click)="picker2.open()"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+
+    <button
+      class="button-form"
+      mat-raised-button
+      color="accent"
+      (click)="applyDateFilter()"
+      [disabled]="form.invalid"
+    >
+      Submit
+    </button>
+    
+    <button
+      mat-raised-button
+      color="accent"
+      type="button"
+      [disabled]="form.invalid"
+    >
+      Clear
+    </button>
+  </form>
+  <mat-label class="Filter_lable">Filter:</mat-label>
+  <input
+    matInput
+    class="Filter"
+    type="text"
+    #filter
+    (keyup)="doFilter(filter.value)"
+    placeholder="Filter"
+  />
+  
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="custom_date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+      <td mat-cell *matCellDef="let row">{{ row.custom_date }}</td>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let row">{{ row.type }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    #paginator
+    [length]="dataSource?.data?.length"
+    [pageIndex]="0"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20]"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+ 
+</div>

@@ -1,0 +1,18 @@
+.full-width-table {
+  width: 100%;
+}
+.data-table
+{
+  width: 80%;
+  margin: 20px auto;
+}
+.Filter{
+  position: absolute;
+  margin-left: 980px;
+  margin-bottom: 20px;
+}
+.Filter_lable
+{
+  position: absolute;
+  margin-left: 940px;
+}
